@@ -2,12 +2,11 @@
 
 require 'connexion.php';
 
-// Récupère les données de la base de donnée
-$stmt = $pdo->prepare("SELECT nom, prenom, email, created_at FROM users ORDER BY created_at DESC");
+// Récupère le dernier utilisateur ajouté
+$stmt = $pdo->prepare("SELECT nom, prenom, email, created_at FROM users ORDER BY created_at DESC LIMIT 1");
 $stmt->execute();
 
-$users = $stmt->fetchAll(PDO::FETCH_ASSOC);
-$users = [];
+$lastUser = $stmt->fetch(PDO::FETCH_ASSOC);
 
 ?>
 
@@ -30,14 +29,14 @@ $users = [];
   <header>
     <nav>
       <ul>
-        <li><a href="#">Accueil</a></li>
-        <li><a href="#">Contactez-moi</a></li>
+        <li><a href="#section-1">Accueil</a></li>
+        <li><a href="#section-2">Contactez-moi</a></li>
       </ul>
     </nav>
   </header>
 
   <main>
-    <section>
+    <section id="section-1">
       <img src="https://picsum.photos/400/300" alt="#" />
       <p>
         Lorem ipsum dolor sit amet consectetur adipisicing elit. Quae
@@ -52,7 +51,7 @@ $users = [];
         temporibus ipsa veniam cumque? Ut, nulla!
       </p>
     </section>
-    <section>
+    <section id="section-2">
       <form action="inscription.php" method="POST">
         <label for="nom">Nom :</label>
         <input type="text" id="nom" name="nom" required />
@@ -65,13 +64,17 @@ $users = [];
 
         <button type="submit">Validez</button>
 
-        <p class="error-p hidden">Votre demande est bien envoyée !</p>
+        <p class="submit-notif hidden">Votre demande est bien envoyée !</p>
       </form>
     </section>
   </main>
 
   <footer>
-    <p>Page web faite par <span><?php ($users['nom']) || 'Nom' ?> <?php ($users['prenom']) || 'Prénom' ?></span> venant de la base de données Php</p>
+    <p>Page web faite par <span><?php if (!empty($lastUser)) {
+                                  echo $lastUser['nom'] . ' ' . $lastUser['prenom'];
+                                } else {
+                                  echo 'Nom Prénom';
+                                } ?></span> venant de la base de données</p>
   </footer>
 
   <script src="./main.js"></script>

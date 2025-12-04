@@ -1,20 +1,9 @@
-document.querySelector("form").addEventListener("submit", function (event) {
-  const nomInput = document.getElementById("nom");
-  const nom = nomInput.value.trim();
-  const regex = /[a-zA-ZÀ-ÿ '-]{2,}/;
-  const error = document.getElementById("error-p");
+// page = .../? de l'url
+const page = window.location.search;
 
-  // Cacher l'erreur précédente au début
-  if (error) error.hidden = true;
+const notif = document.querySelector(".submit-notif");
 
-  if (!regex.test(nom)) {
-    if (error) {
-      error.style.display = "block"; // Afficher l'erreur
-    } else {
-      error.style.display = "hidden";
-    }
-    nomInput.focus();
-    event.preventDefault();
-    return false; // Sécurité supplémentaire
-  }
-});
+// Je dis que si dans l'url, il y a ?success=1 qui est ma valeur de mon url quand un item est arrivé dans ma table, on affiche ce message
+if (page === "?success=1") {
+  notif.classList.remove("hidden");
+}
