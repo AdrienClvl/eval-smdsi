@@ -1,6 +1,5 @@
 <?php
-
-// Connexion à ma base  de donnée eval-smdsi avec PDO
+// Connexion à la base de données eval-smdsi avec PDO
 
 $host     = 'localhost';
 $dbname   = 'eval-smdsi';
@@ -13,9 +12,9 @@ try {
     $username,
     $password,
     [
-      PDO::ATTR_ERRMODE            => PDO::ERRMODE_EXCEPTION, // erreurs en exceptions
-      PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC,       // fetch en tableau associatif
-      PDO::ATTR_EMULATE_PREPARES   => false,                  // meilleures requêtes préparées
+      PDO::ATTR_ERRMODE            => PDO::ERRMODE_EXCEPTION,
+      PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC,
+      PDO::ATTR_EMULATE_PREPARES   => false,
     ]
   );
   // echo 'Connexion réussie';

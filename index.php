@@ -1,3 +1,16 @@
+<?php
+
+require 'connexion.php';
+
+// Récupère les données de la base de donnée
+$stmt = $pdo->prepare("SELECT nom, prenom, email, created_at FROM users ORDER BY created_at DESC");
+$stmt->execute();
+
+$users = $stmt->fetchAll(PDO::FETCH_ASSOC);
+$users = [];
+
+?>
+
 <!DOCTYPE html>
 <html lang="fr">
 
@@ -9,6 +22,11 @@
 </head>
 
 <body>
+
+  <?php
+  $error = $_GET['error'] ?? '';
+  ?>
+
   <header>
     <nav>
       <ul>
@@ -35,25 +53,25 @@
       </p>
     </section>
     <section>
-      <form action="inscription.php">
-        <label for="name">Nom :</label>
-        <input type="text" id="name" name="name" />
+      <form action="inscription.php" method="POST">
+        <label for="nom">Nom :</label>
+        <input type="text" id="nom" name="nom" required />
 
         <label for="prenom">Prénom :</label>
-        <input type="text" id="prenom" name="prenom" />
+        <input type="text" id="prenom" name="prenom" required />
 
         <label for="email">Email :</label>
-        <input type="email" id="email" name="email" />
+        <input type="email" id="email" name="email" required />
 
         <button type="submit">Validez</button>
 
-        <p class="hidden">Votre demande est bien envoyée !</p>
+        <p class="error-p hidden">Votre demande est bien envoyée !</p>
       </form>
     </section>
   </main>
 
   <footer>
-    <p>Page web faite par <span>Adrien Clavreul</span> venant de la base de données Php</p>
+    <p>Page web faite par <span><?php ($users['nom']) || 'Nom' ?> <?php ($users['prenom']) || 'Prénom' ?></span> venant de la base de données Php</p>
   </footer>
 
   <script src="./main.js"></script>
