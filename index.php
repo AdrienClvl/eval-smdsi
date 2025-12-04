@@ -54,13 +54,13 @@ $lastUser = $stmt->fetch(PDO::FETCH_ASSOC);
     <section id="section-2">
       <form action="inscription.php" method="POST">
         <label for="nom">Nom :</label>
-        <input type="text" id="nom" name="nom" required />
+        <input type="text" id="nom" name="nom" required placeholder="John" />
 
         <label for="prenom">Prénom :</label>
-        <input type="text" id="prenom" name="prenom" required />
+        <input type="text" id="prenom" name="prenom" required placeholder="Doe" />
 
         <label for="email">Email :</label>
-        <input type="email" id="email" name="email" required />
+        <input type="email" id="email" name="email" required placeholder="john@doe.com" />
 
         <button type="submit">Validez</button>
 

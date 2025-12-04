@@ -182,7 +182,10 @@ section:nth-child(1) {
 
 section:nth-child(1) > * {
   background-color: skyblue;
+  justify-content: center;
+  align-content: center;
   flex: 1;
+  padding: 1rem;
 }
 
 form {
@@ -205,6 +208,10 @@ form > p {
   background-color: salmon;
   padding: 2rem;
   text-align: center;
+}
+
+form > input {
+  padding: 1rem;
 }
 
 .hidden {
